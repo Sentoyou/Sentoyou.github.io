@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Are you still mad?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('katrina.png') no-repeat center center/cover;
+            text-align: center;
+            flex-direction: column;  /* Align content vertically */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #container {
+            position: relative;
+            display: flex;
+            flex-direction: column; /* Stack the buttons vertically */
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        #no {
+            background-color: #6bff6b;
+            color: white;
+        }
+
+        .final-message {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: top 2s; 
+        }
+
+        .image-container img {
+            position: absolute;
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gif-container">
+        <iframe src="https://giphy.com/embed/c76IJLufpNwSULPk77" width="220" height="220" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+
+    <div id="container">
+        <h1>Are you still mad at me, Bebii?  ꒰(˶◞ ‸ ◟˶)꒱ </h1>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+        <div class="image-container" id="image-container"></div>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById('yes');
+        const noButton = document.getElementById('no');
+        const container = document.getElementById('container');
+        const imageContainer = document.getElementById('image-container');
+    
+        const images = [
+            'rat.png',  
+            'sad.gif',
+            'ssad.png',
+            'cacat.jpg',
+            'kermit.png'
+        ];
+    
+        let imageIndex = 0;  
+    
+        function moveButton() {
+            const randomX = Math.random() * (window.innerWidth - yesButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - yesButton.offsetHeight);
+    
+            yesButton.style.position = 'absolute';
+            yesButton.style.left = `${randomX}px`;
+            yesButton.style.top = `${randomY}px`;
+        }
+    
+        yesButton.addEventListener('mouseover', () => {
+            moveButton();
+            showNewImage(); 
+        });
+
+        yesButton.addEventListener('touchstart', () => {
+            moveButton();
+            showNewImage(); 
+        });
+    
+        function showNewImage() {
+            const newImage = document.createElement('img');
+            newImage.src = images[imageIndex]; 
+            newImage.alt = 'Random Image';
+            
+            const randomX = Math.random() * (window.innerWidth - 200);  
+            const randomY = Math.random() * (window.innerHeight - 200); 
+            newImage.style.left = `${randomX}px`;
+            newImage.style.top = `${randomY}px`;
+
+            imageContainer.innerHTML = ''; 
+            imageContainer.appendChild(newImage); 
+            
+            imageIndex = (imageIndex + 1) % images.length;
+        }
+
+        noButton.addEventListener('click', () => {
+            container.innerHTML = '<h1>Yay! I knew you couldn\'t stay mad at me, Iloveyouuu. 🥰</h1>';
+        });
+    </script>
+</body>
+</html>
